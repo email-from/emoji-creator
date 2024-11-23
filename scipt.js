@@ -6,6 +6,7 @@ const copyBtn = document.getElementById('copyBtn');
 let faceColor = '#ffcc00';
 let eyeShape = 'circle'; // 'circle' or 'rectangle'
 let mouthType = 'smile'; // 'smile', 'frown', 'neutral'
+let accessoryType = ''; // Optional accessory (e.g., glasses, hats)
 
 // Function to redraw the emoji with current settings
 function drawEmoji() {
@@ -22,6 +23,11 @@ function drawEmoji() {
 
   // Draw Mouth
   drawMouth();
+
+  // Draw Accessories (if any)
+  if (accessoryType) {
+    drawAccessory();
+  }
 }
 
 // Draw Eyes based on selected shape
@@ -55,6 +61,16 @@ function drawMouth() {
   ctx.stroke();
 }
 
+// Draw Accessories (example: glasses)
+function drawAccessory() {
+  if (accessoryType === 'glasses') {
+    ctx.beginPath();
+    ctx.rect(85, 95, 40, 20); // Left glasses frame
+    ctx.rect(175, 95, 40, 20); // Right glasses frame
+    ctx.stroke();
+  }
+}
+
 // Functions for customization
 function changeFaceColor() {
   const colors = ['#ffcc00', '#ff6666', '#66ff66', '#6666ff', '#ff66cc'];
@@ -70,6 +86,13 @@ function changeEyeShape() {
 function changeMouth() {
   const mouths = ['smile', 'frown', 'neutral'];
   mouthType = mouths[(mouths.indexOf(mouthType) + 1) % mouths.length];
+  drawEmoji();
+}
+
+function changeAccessory() {
+  // Cycle through accessories (e.g., glasses)
+  const accessories = ['', 'glasses'];
+  accessoryType = accessories[(accessories.indexOf(accessoryType) + 1) % accessories.length];
   drawEmoji();
 }
 
@@ -92,11 +115,4 @@ copyBtn.addEventListener('click', () => {
   img.src = dataUrl;
   img.onload = function () {
     const range = document.createRange();
-    range.selectNode(img);
-    const selection = window.getSelection();
-    selection.removeAllRanges();
-    selection.addRange(range);
-    document.execCommand('copy');
-    alert('Emoji copied to clipboard!');
-  };
-});
+    range.selectNode(img
