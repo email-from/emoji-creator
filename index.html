@@ -9,41 +9,31 @@
 <body>
   <h1>Create or Edit Your Emoji</h1>
 
-  <!-- Search and Emoji List -->
+  <!-- Search Bar -->
   <div class="search">
     <input type="text" id="emojiSearch" placeholder="Search for emojis..." oninput="searchEmojis()">
   </div>
 
+  <!-- Emoji Gallery -->
   <div class="gallery">
     <h3>Choose an Emoji to Edit</h3>
     <div class="emoji-options" id="emojiGallery"></div>
   </div>
 
-  <!-- Emoji Canvas -->
+  <!-- Canvas to Edit Emoji -->
   <div class="canvas-container">
     <canvas id="emojiCanvas" width="300" height="300"></canvas>
   </div>
 
-  <!-- Customization Controls -->
+  <!-- Controls for Customizing Emoji -->
   <div class="controls">
-    <h3>Customize Your Emoji</h3>
-    <button onclick="changeFaceColor()">Change Face Color</button>
-    <button onclick="changeEyeShape()">Change Eye Shape</button>
-    <button onclick="changeMouth()">Change Mouth</button>
-    <button onclick="addAccessory()">Add Accessory</button>
+    <button onclick="generateShareableCode()">Generate Shareable Code</button>
   </div>
 
-  <!-- Code Generation Section -->
+  <!-- Shareable Code Section -->
   <div class="code-output">
     <h3>Share Your Emoji</h3>
-    <button id="generateCodeBtn">Generate Shareable Code</button>
     <textarea id="shareCode" readonly rows="5" cols="50"></textarea>
-  </div>
-
-  <!-- Download & Copy -->
-  <div class="buttons">
-    <button id="downloadBtn">Download Emoji</button>
-    <button id="copyBtn">Copy Emoji</button>
   </div>
 
   <script src="script.js"></script>
