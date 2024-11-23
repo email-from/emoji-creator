@@ -8,11 +8,22 @@
 </head>
 <body>
   <h1>Create Your Own Emoji</h1>
+  
   <div class="canvas-container">
     <canvas id="emojiCanvas" width="300" height="300"></canvas>
   </div>
+  
+  <!-- Control Panel for Customization -->
+  <div class="controls">
+    <h3>Customize Emoji</h3>
+    <button onclick="changeFaceColor()">Change Face Color</button>
+    <button onclick="changeEyeShape()">Change Eye Shape</button>
+    <button onclick="changeMouth()">Change Mouth</button>
+  </div>
+
   <button id="downloadBtn">Download Emoji</button>
   <button id="copyBtn">Copy Emoji</button>
+
   <script src="script.js"></script>
 </body>
 </html>
