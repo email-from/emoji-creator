@@ -8,6 +8,26 @@ h1 {
   margin-top: 20px;
 }
 
+.gallery {
+  margin-top: 30px;
+}
+
+.emoji-options {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.emoji {
+  transition: transform 0.3s;
+}
+
+.emoji:hover {
+  transform: scale(1.2);
+}
+
 .canvas-container {
   margin: 20px auto;
 }
