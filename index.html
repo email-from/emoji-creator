@@ -8,21 +8,39 @@
 </head>
 <body>
   <h1>Create Your Own Emoji</h1>
-  
+
+  <!-- Canvas Section for Emoji Creation -->
   <div class="canvas-container">
     <canvas id="emojiCanvas" width="300" height="300"></canvas>
   </div>
-  
+
   <!-- Control Panel for Customization -->
   <div class="controls">
-    <h3>Customize Emoji</h3>
+    <h3>Customize Your Emoji</h3>
     <button onclick="changeFaceColor()">Change Face Color</button>
     <button onclick="changeEyeShape()">Change Eye Shape</button>
     <button onclick="changeMouth()">Change Mouth</button>
+    <button onclick="changeAccessory()">Add Accessory</button>
   </div>
 
+  <!-- Download and Copy Buttons -->
   <button id="downloadBtn">Download Emoji</button>
   <button id="copyBtn">Copy Emoji</button>
+
+  <!-- Informational Section about Emoji Creation -->
+  <div class="info-section">
+    <h2>How Emojis Are Made</h2>
+    <p>Emojis are designed to be simple, easily recognizable symbols that express emotions, objects, and ideas. They are created by graphic designers and standardized through the Unicode system, allowing them to be displayed consistently across various platforms.</p>
+    <p>Each emoji has a unique <strong>Unicode code point</strong> (e.g., 😀 is U+1F600) which ensures the emoji is the same everywhere it’s used. Different platforms like Apple, Google, and Microsoft each render emojis slightly differently to match their design language.</p>
+    <h3>Steps in Creating Emojis:</h3>
+    <ol>
+      <li><strong>Design:</strong> Graphic designers create simple and expressive designs using vector software.</li>
+      <li><strong>Standardization:</strong> Emojis are assigned a Unicode code point by the Unicode Consortium.</li>
+      <li><strong>Platform Rendering:</strong> Each platform (e.g., iOS, Android) has its own style to render the emoji image.</li>
+      <li><strong>Customization:</strong> Users can create their own custom emojis using online tools or apps, like this one!</li>
+    </ol>
+    <p>Explore the possibilities, and create your own custom emojis here!</p>
+  </div>
 
   <script src="script.js"></script>
 </body>
