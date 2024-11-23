@@ -8,6 +8,9 @@ const emojiSearch = document.getElementById('emojiSearch');
 const API_URL = 'https://emoji-api.com/emojis?access_key=c1e940e6dbe3fbd13928416585178ed4f99c690c';
 
 let emojis = [];
+let currentEmoji = null;
+let emojiSize = 150; // Default size for the emoji
+let emojiColor = 'black'; // Default color for the emoji
 
 // Fetch all emojis from the API
 async function fetchEmojis() {
@@ -29,17 +32,19 @@ function updateEmojiGallery(emojisToDisplay) {
     const emojiDiv = document.createElement('div');
     emojiDiv.className = 'emoji';
     emojiDiv.textContent = emoji.character;
-    emojiDiv.onclick = () => loadEmoji(emoji);
+    emojiDiv.onclick = () => loadEmoji(emoji); // Load emoji when clicked
     emojiGallery.appendChild(emojiDiv);
   });
 }
 
 // Load selected emoji into the canvas
 function loadEmoji(emoji) {
+  currentEmoji = emoji; // Store the current selected emoji
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
 
   // Draw the emoji on canvas
-  ctx.font = '150px Arial';
+  ctx.font = `${emojiSize}px Arial`;
+  ctx.fillStyle = emojiColor; // Use the selected color
   ctx.fillText(emoji.character, 75, 150); // Adjust the position and size as needed
 }
 
@@ -50,11 +55,26 @@ function searchEmojis() {
   updateEmojiGallery(filteredEmojis);
 }
 
+// Change the emoji size
+function changeEmojiSize(size) {
+  emojiSize = size;
+  if (currentEmoji) {
+    loadEmoji(currentEmoji); // Re-load emoji with new size
+  }
+}
+
+// Change the emoji color
+function changeEmojiColor(color) {
+  emojiColor = color;
+  if (currentEmoji) {
+    loadEmoji(currentEmoji); // Re-load emoji with new color
+  }
+}
+
 // Generate shareable code
 function generateShareableCode() {
-  const emoji = emojis.find(emoji => emoji.character === ctx.fillText); // Find the emoji used in the canvas
-  if (emoji) {
-    const code = `<div style="font-size: 100px;">${emoji.character}</div>`;
+  if (currentEmoji) {
+    const code = `<div style="font-size: ${emojiSize}px; color: ${emojiColor};">${currentEmoji.character}</div>`;
     shareCodeArea.value = code;
   } else {
     shareCodeArea.value = 'Please select an emoji first!';
