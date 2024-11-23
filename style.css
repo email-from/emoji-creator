@@ -33,3 +33,27 @@ button {
   font-size: 14px;
   padding: 8px 15px;
 }
+
+.info-section {
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  text-align: left;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.info-section h2 {
+  margin-top: 0;
+}
+
+.info-section p {
+  font-size: 16px;
+}
+
+.info-section ol {
+  font-size: 16px;
+  margin-left: 20px;
+}
