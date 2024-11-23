@@ -2,6 +2,18 @@ const canvas = document.getElementById('emojiCanvas');
 const ctx = canvas.getContext('2d');
 const downloadBtn = document.getElementById('downloadBtn');
 const copyBtn = document.getElementById('copyBtn');
+const generateCodeBtn = document.getElementById('generateCodeBtn');
+const emojiGallery = document.getElementById('emojiGallery');
+const shareCodeArea = document.getElementById('shareCode');
+
+// Emoji Data (Predefined list, could be fetched from an API or extended)
+const emojiList = [
+  { symbol: "😀", name: "Grinning Face" },
+  { symbol: "😎", name: "Smiling Face with Sunglasses" },
+  { symbol: "😂", name: "Face with Tears of Joy" },
+  { symbol: "😍", name: "Heart Eyes" },
+  // Add more emojis as needed
+];
 
 // Initial Emoji Data
 let faceColor = '#ffcc00';
@@ -9,21 +21,42 @@ let eyeShape = 'circle'; // Options: 'circle', 'rectangle'
 let mouthType = 'smile'; // Options: 'smile', 'frown', 'neutral'
 let accessory = ''; // Options: '', 'glasses'
 
-// Predefined Emojis (These could be more complex emojis in a real application)
-const emojis = {
-  emoji1: { faceColor: '#ffcc00', eyeShape: 'circle', mouthType: 'smile', accessory: '' },
-  emoji2: { faceColor: '#ff6666', eyeShape: 'rectangle', mouthType: 'neutral', accessory: 'glasses' },
-  emoji3: { faceColor: '#66ff66', eyeShape: 'circle', mouthType: 'frown', accessory: '' },
-  emoji4: { faceColor: '#6666ff', eyeShape: 'rectangle', mouthType: 'smile', accessory: '' },
-};
+// Load Emojis into the Gallery
+function loadEmojis() {
+  emojiGallery.innerHTML = ''; // Clear gallery
 
-// Load Predefined Emoji onto the Canvas
-function loadEmoji(emojiName) {
-  const emoji = emojis[emojiName];
-  faceColor = emoji.faceColor;
-  eyeShape = emoji.eyeShape;
-  mouthType = emoji.mouthType;
-  accessory = emoji.accessory;
+  emojiList.forEach(emoji => {
+    const emojiDiv = document.createElement('div');
+    emojiDiv.className = 'emoji';
+    emojiDiv.textContent = emoji.symbol;
+    emojiDiv.onclick = () => loadEmoji(emoji);
+    emojiGallery.appendChild(emojiDiv);
+  });
+}
+
+// Search Emojis
+function searchEmojis() {
+  const query = document.getElementById('emojiSearch').value.toLowerCase();
+  const filteredEmojis = emojiList.filter(emoji => emoji.name.toLowerCase().includes(query));
+  
+  emojiGallery.innerHTML = '';
+  filteredEmojis.forEach(emoji => {
+    const emojiDiv = document.createElement('div');
+    emojiDiv.className = 'emoji';
+    emojiDiv.textContent = emoji.symbol;
+    emojiDiv.onclick = () => loadEmoji(emoji);
+    emojiGallery.appendChild(emojiDiv);
+  });
+}
+
+// Load Selected Emoji into the Editor
+function loadEmoji(emoji) {
+  faceColor = '#ffcc00'; // Default face color for all
+  eyeShape = 'circle'; // Default eye shape
+  mouthType = 'smile'; // Default mouth
+  accessory = ''; // Default accessories
+  
+  // You can customize further based on emoji type
   drawEmoji();
 }
 
@@ -52,7 +85,6 @@ function drawEmoji() {
 // Draw Eyes
 function drawEyes() {
   ctx.fillStyle = '#000'; // Eye color
-
   if (eyeShape === 'circle') {
     ctx.beginPath();
     ctx.arc(110, 120, 15, 0, Math.PI * 2); // Left eye
@@ -93,6 +125,17 @@ function drawGlasses() {
   ctx.stroke();
 }
 
-// Customization Functions
-function changeFaceColor() {
-  const colors = ['#ffcc00', '#ff6666
+// Generate Shareable Code (HTML or JavaScript)
+function generateShareableCode() {
+  const code = `
+  <div style="font-size: 50px;">
+    ${emojiList[0].symbol} <!-- Customize this with actual emoji -->
+  </div>
+  <script>
+    // Add your customization logic here
+  </script>`;
+  shareCodeArea.value = code;
+}
+
+// Initialize the Page
+loadEmojis();
