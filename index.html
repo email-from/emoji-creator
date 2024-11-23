@@ -1,41 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Emoji Builder</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Builder</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Create or Edit Your Emoji</h1>
 
-  <!-- Search Bar -->
-  <div class="search">
-    <input type="text" id="emojiSearch" placeholder="Search for emojis..." oninput="searchEmojis()">
-  </div>
+    <h1>Emoji Builder</h1>
 
-  <!-- Emoji Gallery -->
-  <div class="gallery">
-    <h3>Choose an Emoji to Edit</h3>
-    <div class="emoji-options" id="emojiGallery"></div>
-  </div>
+    <!-- Search Bar -->
+    <input type="text" id="emojiSearch" placeholder="Search emojis..." oninput="searchEmojis()">
 
-  <!-- Canvas to Edit Emoji -->
-  <div class="canvas-container">
-    <canvas id="emojiCanvas" width="300" height="300"></canvas>
-  </div>
+    <!-- Emoji Gallery -->
+    <div id="emojiGallery"></div>
 
-  <!-- Controls for Customizing Emoji -->
-  <div class="controls">
-    <button onclick="generateShareableCode()">Generate Shareable Code</button>
-  </div>
+    <!-- Emoji Canvas to Display Selected Emoji -->
+    <canvas id="emojiCanvas"></canvas>
 
-  <!-- Shareable Code Section -->
-  <div class="code-output">
-    <h3>Share Your Emoji</h3>
-    <textarea id="shareCode" readonly rows="5" cols="50"></textarea>
-  </div>
+    <!-- Controls for Size and Color -->
+    <div class="controls">
+        <label for="sizeControl">Size: </label>
+        <input type="range" id="sizeControl" min="50" max="300" value="150" oninput="changeEmojiSize(this.value)">
+        
+        <label for="colorControl">Color: </label>
+        <input type="color" id="colorControl" value="#000000" oninput="changeEmojiColor(this.value)">
+        
+        <button onclick="generateShareableCode()">Generate Shareable Code</button>
+    </div>
 
-  <script src="script.js"></script>
+    <!-- Shareable Code -->
+    <textarea id="shareCode" readonly></textarea>
+
+    <!-- JavaScript File -->
+    <script src="scripts.js"></script>
+
 </body>
 </html>
