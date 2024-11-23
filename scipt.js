@@ -3,18 +3,19 @@ const ctx = canvas.getContext('2d');
 const downloadBtn = document.getElementById('downloadBtn');
 const copyBtn = document.getElementById('copyBtn');
 
+// Initial Emoji Data
 let faceColor = '#ffcc00';
-let eyeShape = 'circle'; // 'circle' or 'rectangle'
-let mouthType = 'smile'; // 'smile', 'frown', 'neutral'
-let accessoryType = ''; // Optional accessory (e.g., glasses, hats)
+let eyeShape = 'circle'; // Options: 'circle', 'rectangle'
+let mouthType = 'smile'; // Options: 'smile', 'frown', 'neutral'
+let accessory = ''; // Options: '', 'glasses'
 
-// Function to redraw the emoji with current settings
+// Function to Draw the Emoji
 function drawEmoji() {
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
 
-  // Draw Face
+  // Draw the face
   ctx.beginPath();
-  ctx.arc(150, 150, 100, 0, Math.PI * 2); // Draw circle
+  ctx.arc(150, 150, 100, 0, Math.PI * 2); // Draw face circle
   ctx.fillStyle = faceColor;
   ctx.fill();
 
@@ -24,15 +25,16 @@ function drawEmoji() {
   // Draw Mouth
   drawMouth();
 
-  // Draw Accessories (if any)
-  if (accessoryType) {
-    drawAccessory();
+  // Draw Accessories
+  if (accessory === 'glasses') {
+    drawGlasses();
   }
 }
 
-// Draw Eyes based on selected shape
+// Draw Eyes
 function drawEyes() {
-  ctx.fillStyle = '#000'; // Black color for eyes
+  ctx.fillStyle = '#000'; // Eye color
+
   if (eyeShape === 'circle') {
     ctx.beginPath();
     ctx.arc(110, 120, 15, 0, Math.PI * 2); // Left eye
@@ -41,12 +43,12 @@ function drawEyes() {
     ctx.arc(190, 120, 15, 0, Math.PI * 2); // Right eye
     ctx.fill();
   } else if (eyeShape === 'rectangle') {
-    ctx.fillRect(95, 110, 30, 20); // Left eye (rectangle)
-    ctx.fillRect(175, 110, 30, 20); // Right eye (rectangle)
+    ctx.fillRect(95, 110, 30, 20); // Left eye
+    ctx.fillRect(175, 110, 30, 20); // Right eye
   }
 }
 
-// Draw Mouth based on selected type
+// Draw Mouth
 function drawMouth() {
   ctx.lineWidth = 5;
   ctx.beginPath();
@@ -56,22 +58,24 @@ function drawMouth() {
     ctx.arc(150, 180, 40, Math.PI, 2 * Math.PI); // Frown
   } else {
     ctx.moveTo(110, 200);
-    ctx.lineTo(190, 200); // Neutral straight line mouth
+    ctx.lineTo(190, 200); // Neutral
   }
   ctx.stroke();
 }
 
-// Draw Accessories (example: glasses)
-function drawAccessory() {
-  if (accessoryType === 'glasses') {
-    ctx.beginPath();
-    ctx.rect(85, 95, 40, 20); // Left glasses frame
-    ctx.rect(175, 95, 40, 20); // Right glasses frame
-    ctx.stroke();
-  }
+// Draw Glasses
+function drawGlasses() {
+  ctx.strokeStyle = '#000'; // Glasses frame color
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.rect(85, 95, 40, 20); // Left lens
+  ctx.rect(175, 95, 40, 20); // Right lens
+  ctx.moveTo(125, 105);
+  ctx.lineTo(175, 105); // Bridge of glasses
+  ctx.stroke();
 }
 
-// Functions for customization
+// Customization Functions
 function changeFaceColor() {
   const colors = ['#ffcc00', '#ff6666', '#66ff66', '#6666ff', '#ff66cc'];
   faceColor = colors[Math.floor(Math.random() * colors.length)];
@@ -89,17 +93,15 @@ function changeMouth() {
   drawEmoji();
 }
 
-function changeAccessory() {
-  // Cycle through accessories (e.g., glasses)
-  const accessories = ['', 'glasses'];
-  accessoryType = accessories[(accessories.indexOf(accessoryType) + 1) % accessories.length];
+function addAccessory() {
+  accessory = accessory === '' ? 'glasses' : ''; // Toggle glasses
   drawEmoji();
 }
 
-// Initial drawing of the emoji
+// Initial Draw
 drawEmoji();
 
-// Download emoji as PNG
+// Download Emoji as PNG
 downloadBtn.addEventListener('click', () => {
   const dataUrl = canvas.toDataURL('image/png');
   const link = document.createElement('a');
@@ -108,11 +110,16 @@ downloadBtn.addEventListener('click', () => {
   link.click();
 });
 
-// Copy emoji to clipboard (as image)
+// Copy Emoji to Clipboard
 copyBtn.addEventListener('click', () => {
   const dataUrl = canvas.toDataURL('image/png');
   const img = new Image();
   img.src = dataUrl;
   img.onload = function () {
     const range = document.createRange();
-    range.selectNode(img
+    range.selectNode(img);
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    alert('Emoji copied to clipboard!');
+  };
+});
