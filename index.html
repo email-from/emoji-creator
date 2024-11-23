@@ -9,15 +9,14 @@
 <body>
   <h1>Create or Edit Your Emoji</h1>
 
-  <!-- Emoji Selection Gallery -->
+  <!-- Search and Emoji List -->
+  <div class="search">
+    <input type="text" id="emojiSearch" placeholder="Search for emojis..." oninput="searchEmojis()">
+  </div>
+
   <div class="gallery">
     <h3>Choose an Emoji to Edit</h3>
-    <div class="emoji-options">
-      <div class="emoji" onclick="loadEmoji('emoji1')">😀</div>
-      <div class="emoji" onclick="loadEmoji('emoji2')">😎</div>
-      <div class="emoji" onclick="loadEmoji('emoji3')">😂</div>
-      <div class="emoji" onclick="loadEmoji('emoji4')">😍</div>
-    </div>
+    <div class="emoji-options" id="emojiGallery"></div>
   </div>
 
   <!-- Emoji Canvas -->
@@ -34,23 +33,17 @@
     <button onclick="addAccessory()">Add Accessory</button>
   </div>
 
+  <!-- Code Generation Section -->
+  <div class="code-output">
+    <h3>Share Your Emoji</h3>
+    <button id="generateCodeBtn">Generate Shareable Code</button>
+    <textarea id="shareCode" readonly rows="5" cols="50"></textarea>
+  </div>
+
   <!-- Download & Copy -->
   <div class="buttons">
     <button id="downloadBtn">Download Emoji</button>
     <button id="copyBtn">Copy Emoji</button>
-  </div>
-
-  <!-- Emoji Creation Info -->
-  <div class="info-section">
-    <h2>How Emojis Are Made</h2>
-    <p>Emojis are graphic images that represent different emotions, objects, or ideas. They are created using vector graphics, designed to be simple and expressive. Emojis are standardized by the Unicode Consortium, ensuring they are displayed consistently across all platforms.</p>
-    <h3>Steps in Creating Emojis:</h3>
-    <ol>
-      <li><strong>Design:</strong> Create simple and expressive vector designs.</li>
-      <li><strong>Standardization:</strong> Emojis are assigned Unicode values to be universally recognized.</li>
-      <li><strong>Platform Rendering:</strong> Different platforms style the emojis to match their unique design language.</li>
-      <li><strong>Customization:</strong> Emojis can be customized for individual use, like this one!</li>
-    </ol>
   </div>
 
   <script src="script.js"></script>
