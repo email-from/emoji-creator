@@ -9,7 +9,25 @@ let eyeShape = 'circle'; // Options: 'circle', 'rectangle'
 let mouthType = 'smile'; // Options: 'smile', 'frown', 'neutral'
 let accessory = ''; // Options: '', 'glasses'
 
-// Function to Draw the Emoji
+// Predefined Emojis (These could be more complex emojis in a real application)
+const emojis = {
+  emoji1: { faceColor: '#ffcc00', eyeShape: 'circle', mouthType: 'smile', accessory: '' },
+  emoji2: { faceColor: '#ff6666', eyeShape: 'rectangle', mouthType: 'neutral', accessory: 'glasses' },
+  emoji3: { faceColor: '#66ff66', eyeShape: 'circle', mouthType: 'frown', accessory: '' },
+  emoji4: { faceColor: '#6666ff', eyeShape: 'rectangle', mouthType: 'smile', accessory: '' },
+};
+
+// Load Predefined Emoji onto the Canvas
+function loadEmoji(emojiName) {
+  const emoji = emojis[emojiName];
+  faceColor = emoji.faceColor;
+  eyeShape = emoji.eyeShape;
+  mouthType = emoji.mouthType;
+  accessory = emoji.accessory;
+  drawEmoji();
+}
+
+// Draw the Emoji
 function drawEmoji() {
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
 
@@ -77,49 +95,4 @@ function drawGlasses() {
 
 // Customization Functions
 function changeFaceColor() {
-  const colors = ['#ffcc00', '#ff6666', '#66ff66', '#6666ff', '#ff66cc'];
-  faceColor = colors[Math.floor(Math.random() * colors.length)];
-  drawEmoji();
-}
-
-function changeEyeShape() {
-  eyeShape = eyeShape === 'circle' ? 'rectangle' : 'circle';
-  drawEmoji();
-}
-
-function changeMouth() {
-  const mouths = ['smile', 'frown', 'neutral'];
-  mouthType = mouths[(mouths.indexOf(mouthType) + 1) % mouths.length];
-  drawEmoji();
-}
-
-function addAccessory() {
-  accessory = accessory === '' ? 'glasses' : ''; // Toggle glasses
-  drawEmoji();
-}
-
-// Initial Draw
-drawEmoji();
-
-// Download Emoji as PNG
-downloadBtn.addEventListener('click', () => {
-  const dataUrl = canvas.toDataURL('image/png');
-  const link = document.createElement('a');
-  link.href = dataUrl;
-  link.download = 'emoji.png';
-  link.click();
-});
-
-// Copy Emoji to Clipboard
-copyBtn.addEventListener('click', () => {
-  const dataUrl = canvas.toDataURL('image/png');
-  const img = new Image();
-  img.src = dataUrl;
-  img.onload = function () {
-    const range = document.createRange();
-    range.selectNode(img);
-    window.getSelection().addRange(range);
-    document.execCommand('copy');
-    alert('Emoji copied to clipboard!');
-  };
-});
+  const colors = ['#ffcc00', '#ff6666
